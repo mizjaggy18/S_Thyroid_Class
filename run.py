@@ -206,6 +206,8 @@ def run(cyto_job, parameters):
                         # print("Class 0: Normal")
                         id_terms=parameters.cytomine_id_c0_term
                         pred_c0=pred_c0+1
+                        roi.delete()
+                        continue
                     elif pred_labels[0]==1:
                         # print("Class 1: Tumor")
                         id_terms=parameters.cytomine_id_c1_term
