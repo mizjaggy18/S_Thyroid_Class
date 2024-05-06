@@ -195,7 +195,7 @@ def run(cyto_job, parameters):
 
                 elif model_select==2:
                     output = np.zeros((0,num_classes))
-                    arr_out = torch.from_numpy(arr_out.transpose(0, 3, 1, 2))                
+                    arr_out = torch.from_numpy(im.transpose(0, 3, 1, 2))                
                     output_batch = model([arr_out])[output_layer]
 
                 output = np.append(output,output_batch,axis=0)
