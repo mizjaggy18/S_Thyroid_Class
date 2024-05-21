@@ -5,7 +5,7 @@
     "image": "mizjaggy18/s_thyroid_class",
     "type": "singularity"
   },
-  "command-line": "echo [CYTOMINE_HOST] [CYTOMINE_PUBLIC_KEY] [CYTOMINE_PRIVATE_KEY] [CYTOMINE_ID_PROJECT] [CYTOMINE_ID_SOFTWARE] [CYTOMINE_ID_IMAGES] [CYTOMINE_ID_ROI_TERM] [CYTOMINE_ID_C0_TERM] [CYTOMINE_ID_C1_TERM] [MODEL_SELECT] [KEEP_NORMAL] [BATCH_SIZE] [LOG_LEVEL]",
+  "command-line": "echo [CYTOMINE_HOST] [CYTOMINE_PUBLIC_KEY] [CYTOMINE_PRIVATE_KEY] [CYTOMINE_ID_PROJECT] [CYTOMINE_ID_SOFTWARE] [CYTOMINE_ID_IMAGES] [CYTOMINE_ID_ROI_TERM] [CYTOMINE_ID_C0_TERM] [CYTOMINE_ID_C1_TERM] [CYTOMINE_ID_C2_TERM] [MODEL_SELECT] [KEEP_NORMAL] [BATCH_SIZE] [LOG_LEVEL]",
   "inputs": [
     {
       "id": "cytomine_host",
@@ -81,8 +81,8 @@
       "id": "cytomine_id_c0_term",
       "value-key": "[@ID]",
       "command-line-flag": "--@id",
-      "name": "Cytomine class0 (Normal) cell term ID",
-      "description": "Ontology term ID for the cells that will be classified as Class 0 (Normal)",
+      "name": "Cytomine class0 (Non-thyroid) cell term ID",
+      "description": "Ontology term ID for the cells that will be classified as Class 0 (Non-thyroid)",
       "optional": false,
       "type": "Domain",
       "uri": "/api/ontology/$currentOntology$/term.json",
@@ -93,8 +93,20 @@
       "id": "cytomine_id_c1_term",
       "value-key": "[@ID]",
       "command-line-flag": "--@id",
-      "name": "Cytomine class1 (Tumour) cell term ID",
-      "description": "Ontology term ID for the cells that will be classified as Class 1 (Tumour)",
+      "name": "Cytomine class1 (Benign) cell term ID",
+      "description": "Ontology term ID for the cells that will be classified as Class 1 (Benign)",
+      "optional": false,
+      "type": "Domain",
+      "uri": "/api/ontology/$currentOntology$/term.json",
+      "uri-print-attribute": "name",
+      "uri-sort-attribute": "name"
+    },
+    {
+      "id": "cytomine_id_c2_term",
+      "value-key": "[@ID]",
+      "command-line-flag": "--@id",
+      "name": "Cytomine class2 (Malignant) cell term ID",
+      "description": "Ontology term ID for the cells that will be classified as Class 2 (Malignant)",
       "optional": false,
       "type": "Domain",
       "uri": "/api/ontology/$currentOntology$/term.json",
