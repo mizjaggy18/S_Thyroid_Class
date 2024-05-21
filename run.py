@@ -68,7 +68,9 @@ def run(cyto_job, parameters):
     if model_select==1:
         
         # ----- load network ----
-        modelname = "/models/thy-pilot-2class_dn21adam_best_model_100ep.pth"
+        # modelname = "/models/thy-pilot-2class_dn21adam_best_model_100ep.pth"
+        modelname = "/models/thy-3class-all_dn21adam_best_model_100ep.pth"
+        
         gpuid = 0
 
         device = torch.device(gpuid if gpuid!=-2 and torch.cuda.is_available() else 'cpu')
