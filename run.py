@@ -57,7 +57,7 @@ def run(cyto_job, parameters):
     model_select = parameters.model_select
     keep_normal = parameters.keep_normal
     batch_size = parameters.batch_size
-    num_classes = 2
+    num_classes = 3
 
     terms = TermCollection().fetch_with_filter("project", parameters.cytomine_id_project)
     job.update(status=Job.RUNNING, progress=1, statusComment="Terms collected...")
@@ -164,6 +164,7 @@ def run(cyto_job, parameters):
             pred_all = []
             pred_c0 = 0
             pred_c1 = 0    
+            pred_c2
 
             #Go over ROI in this image
             for i, roi in enumerate(roi_annotations):
@@ -206,16 +207,20 @@ def run(cyto_job, parameters):
                 pred_all.append(pred_labels)
 
                 if pred_labels[0]==0:
-                    # print("Class 0: Normal")
+                    # print("Class 0: Non-thyroid")
                     id_terms=parameters.cytomine_id_c0_term
                     pred_c0=pred_c0+1
                     if keep_normal==0:
                         roi.delete()
                         continue
                 elif pred_labels[0]==1:
-                    # print("Class 1: Tumor")
+                    # print("Class 1: Benign")
                     id_terms=parameters.cytomine_id_c1_term
                     pred_c1=pred_c1+1
+                elif pred_labels[0]==2:
+                    # print("Class 2: Malignant")
+                    id_terms=parameters.cytomine_id_c2_term
+                    pred_c2=pred_c2+1
                 
                 cytomine_annotations = AnnotationCollection()
                 annotation=roi_geometry
@@ -237,22 +242,23 @@ def run(cyto_job, parameters):
             end_prediction_time=time.time()
 
             job.update(status=Job.RUNNING, progress=90, statusComment="Finalising Classification....")
-            pred_all=[pred_c0, pred_c1]            
+            pred_all=[pred_c0, pred_c1, pred_c2]            
             print("pred_all:", pred_all)
             im_pred = np.argmax(pred_all)
             print("image prediction:", im_pred)
-            pred_total=pred_c0+pred_c1
+            pred_total=pred_c0+pred_c1+pred_c2
             print("pred_total:",pred_total)
-            print("pred_tumor:",pred_c1)
-            print("pred_normal:",pred_c0)
+            print("pred_nonthyroid:",pred_c0)
+            print("pred_benign:",pred_c1)
+            print("pred_malignant:",pred_c2)
                   
             end_time=time.time()
             print("Execution time: ",end_time-start_time)
             print("Prediction time: ",end_prediction_time-start_prediction_time)
 
             f.write("\n")
-            f.write("Image ID;Class Prediction;Class 0 (Normal);Class 1 (Tumor);Total Prediction;Execution Time;Prediction Time\n")
-            f.write("{};{};{};{};{};{};{}\n".format(id_image,im_pred,pred_c0,pred_c1,pred_total,end_time-start_time,end_prediction_time-start_prediction_time))
+            f.write("Image ID;Class Prediction;Class 0 (Non-thyroid);Class 1 (Benign);Class 2 (Malignant);Total Prediction;Execution Time;Prediction Time\n")
+            f.write("{};{};{};{};{};{};{};{}\n".format(id_image,im_pred,pred_c0,pred_c1,pred_c2,pred_total,end_time-start_time,end_prediction_time-start_prediction_time))
             
         f.close()
         
