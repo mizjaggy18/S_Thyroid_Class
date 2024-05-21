@@ -164,7 +164,7 @@ def run(cyto_job, parameters):
             pred_all = []
             pred_c0 = 0
             pred_c1 = 0    
-            pred_c2
+            pred_c2 = 0
 
             #Go over ROI in this image
             for i, roi in enumerate(roi_annotations):
