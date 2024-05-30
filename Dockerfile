@@ -40,8 +40,8 @@ RUN pip install shapely
 RUN mkdir -p /models 
 ADD /models/thy-pilot-2class_dn21adam_best_model_100ep.pth /models/thy-pilot-2class_dn21adam_best_model_100ep.pth
 RUN chmod 444 /models/thy-pilot-2class_dn21adam_best_model_100ep.pth
-ADD /models/thy-3class-all_dn21adam_best_model_100ep.pth /models/thy-3class-all_dn21adam_best_model_100ep.pth
-RUN chmod 444 /models/thy-3class-all_dn21adam_best_model_100ep.pth
+ADD /models/thy-3class-all-v2_dn21adam_best_model_100ep.pth /models/thy-3class-all-v2_dn21adam_best_model_100ep.pth
+RUN chmod 444 /models/thy-3class-all-v2_dn21adam_best_model_100ep.pth
 
 ADD /models/thy-pilot-2class_dn21adam_best_model_100ep.bin /models/thy-pilot-2class_dn21adam_best_model_100ep.bin
 ADD /models/thy-pilot-2class_dn21adam_best_model_100ep.xml /models/thy-pilot-2class_dn21adam_best_model_100ep.xml
