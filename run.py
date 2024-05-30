@@ -69,7 +69,7 @@ def run(cyto_job, parameters):
         
         # ----- load network ----
         # modelname = "/models/thy-pilot-2class_dn21adam_best_model_100ep.pth"
-        modelname = "/models/thy-3class-all_dn21adam_best_model_100ep.pth"
+        modelname = "/models/thy-3class-all-v2_dn21adam_best_model_100ep.pth"
         
         gpuid = 0
 
